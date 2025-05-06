@@ -1,0 +1,21 @@
+This is great! Well done!
+As a next step, on Tuesday, we will:
+ - Most probably Fetch API - to read
+ - Promises - to read
+ - What is the Content-Type of your responses and how do you parse them?
+ - How do you handle errors? Assume a user is offline.
+ - Can you complete Bonus Challenges as well?
+
+🌤️ Bonus Challenges
+	•	Add a loading spinner while fetching data
+	•	Show wind speed and humidity
+	•	Allow switching between °C and °F
+	•	Make it responsive (mobile-friendly)
+	•	Use Geolocation API to fetch weather based on current location
+
+
+A couple of new tasks:
+ - Set up a GitHub account, and install Git locally. - DONE
+ - Read about Version Control System (VCS), specifically git. - DONE
+ - Create a new public repository in the github, and push your code there. - DONE
+ - Share the repo with me. - DONE
