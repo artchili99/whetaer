@@ -13,6 +13,7 @@ $.get("http://ipinfo.io", function(response) {
     // window.onload = fetchWeather(geoCity);
     document.getElementById('cityInput').value = geoCity;
     submit();
+    document.getElementById('cityInput').value = "";
 }, "jsonp");
 
 const cache = {};
