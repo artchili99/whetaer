@@ -72,10 +72,10 @@ function updateUI(data) {
          <div id="temp">${main.temp}</div>
         <span id="tempTipe">${tempTipe}</span>
         </div>
-        <button onclick="tempSwitch()">show in fahrenheit</button>
+        <button onclick="tempSwitch()" class="btn btn-primary">°F</button>
         <div>${weather[0].description}</div>
-        <div>${main.humidity}%</div>
-        <div>${wind.speed}%</div>
+        <div>humidity : ${main.humidity}%</div>
+        <div>wind speed : ${wind.speed}%</div>
         <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
       `;
 }
