@@ -10,7 +10,7 @@ As a next step, on Tuesday, we will:
 	•	Add a loading spinner while fetching data +
 	•	Show wind speed and humidity +
 	•	Allow switching between °C and °F +
-	•	Make it responsive (mobile-friendly)
+	•	Make it responsive (mobile-friendly) +
 	•	Use Geolocation API to fetch weather based on current location
 
 
