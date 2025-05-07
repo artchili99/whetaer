@@ -36,10 +36,13 @@ async function fetchWeather(city) {
     const data = await response.json();
     cache[city] = data;
     return data;
+
+
 }
 
 async function submit() {
     loader();
+
     const city = cityInput.value.trim();
     if (city) {
         try {
@@ -47,11 +50,11 @@ async function submit() {
             const weatherData = await fetchWeather(city);
             updateUI(weatherData);
             // console.log(weatherData)
-            fadeOut();
+
 
         } catch (error) {
             weatherInfo.innerHTML = `<div class="alert alert-danger" role="alert">${error.message}</div>`;
-            fadeOut();
+
         }
     }
     fadeOut();
@@ -59,12 +62,14 @@ async function submit() {
 
 
 function updateUI(data) {
-    const { name, main, weather } = data;
+    const { name, main, weather,wind } = data;
 
     weatherInfo.innerHTML = `
         <h2>${name}</h2>
         <div>${main.temp}°C</div>
         <div>${weather[0].description}</div>
+        <div>${main.humidity}%</div>
+        <div>${wind.speed}%</div>
         <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
       `;
 }
