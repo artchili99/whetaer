@@ -8,8 +8,21 @@ const searchBtn = document.getElementById('searchBtn');
 const weatherInfo = document.getElementById('weatherInfo');
 
 const cache = {};
+function loader()
+{
+    document.querySelector('.loader-container').classList.add('active');
+}
+function removeLoader()
+{
+    document.querySelector('.loader-container').classList.remove('active');
+}
+function fadeOut()
+{
+    setTimeout(removeLoader,3000);
+}
 
 async function fetchWeather(city) {
+
     if (cache[city]) {
         console.log('City: ', city, ' was cached')
         return cache[city];
@@ -26,16 +39,22 @@ async function fetchWeather(city) {
 }
 
 async function submit() {
+    loader();
     const city = cityInput.value.trim();
     if (city) {
         try {
+
             const weatherData = await fetchWeather(city);
             updateUI(weatherData);
             // console.log(weatherData)
+            fadeOut();
+
         } catch (error) {
             weatherInfo.innerHTML = `<div class="alert alert-danger" role="alert">${error.message}</div>`;
+            fadeOut();
         }
     }
+    fadeOut();
 }
 
 
@@ -51,6 +70,8 @@ function updateUI(data) {
 }
 
 
+
+fadeOut();
 searchBtn.addEventListener('click', submit);
 
 
