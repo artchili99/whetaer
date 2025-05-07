@@ -11,7 +11,7 @@ As a next step, on Tuesday, we will:
 	•	Show wind speed and humidity +
 	•	Allow switching between °C and °F +
 	•	Make it responsive (mobile-friendly) +
-	•	Use Geolocation API to fetch weather based on current location
+	•	Use Geolocation API to fetch weather based on current location +
 
 
 A couple of new tasks:
