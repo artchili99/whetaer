@@ -36,7 +36,7 @@ async function fetchWeather(city) {
     const data = await response.json();
     cache[city] = data;
     return data;
-
+    // console.log(data)
 
 }
 
@@ -62,11 +62,17 @@ async function submit() {
 
 
 function updateUI(data) {
-    const { name, main, weather,wind } = data;
+    const {name, main, weather, wind} = data;
+    var tempTipe = "°C";
+
 
     weatherInfo.innerHTML = `
         <h2>${name}</h2>
-        <div>${main.temp}°C</div>
+        <div>  
+         <div id="temp">${main.temp}</div>
+        <span id="tempTipe">${tempTipe}</span>
+        </div>
+        <button onclick="tempSwitch()">show in fahrenheit</button>
         <div>${weather[0].description}</div>
         <div>${main.humidity}%</div>
         <div>${wind.speed}%</div>
@@ -74,8 +80,12 @@ function updateUI(data) {
       `;
 }
 
-
-
+function tempSwitch() {
+    var temp = document.getElementById('temp').innerHTML;
+    temp = (temp * 9/5) + 32;
+    document.getElementById('temp').innerHTML = temp;
+    document.getElementById('tempTipe').innerHTML = "°F";
+}
 fadeOut();
 searchBtn.addEventListener('click', submit);
 
