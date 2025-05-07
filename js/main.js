@@ -6,8 +6,18 @@ const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const cityInput = document.getElementById('cityInput');
 const searchBtn = document.getElementById('searchBtn');
 const weatherInfo = document.getElementById('weatherInfo');
+$.get("http://ipinfo.io", function(response) {
+
+    const geoCity = response.city;
+    console.log(geoCity);
+    // window.onload = fetchWeather(geoCity);
+    document.getElementById('cityInput').value = geoCity;
+    submit();
+}, "jsonp");
 
 const cache = {};
+
+
 function loader()
 {
     document.querySelector('.loader-container').classList.add('active');
@@ -76,8 +86,8 @@ function updateUI(data) {
         <button onclick="tempSwitch()" class="btn btn-primary" id="tempSwitch">°F</button>
         </div>
         <div>${weather[0].description}</div>
-        <div>humidity : ${main.humidity}%</div>
-        <div>wind speed : ${wind.speed}%</div>
+        <div>humidity : ${main.humidity}</div>
+        <div>wind speed : ${wind.speed}</div>
         <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
       `;
 }
