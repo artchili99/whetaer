@@ -27,19 +27,19 @@
 </div>
 <script src="js/main.js"></script>
 
-<template>
-    <h2></h2>
-    <div>
+<template id="weather-template">
+    <h2 class="city-name"></h2>
+    <div class="temperature-container">
         <div id="temp"></div>
         <span id="tempTipe"></span>
     </div>
     <div id="temps">
-        <button class="btn btn-primary" id="tempSwitch">°F</button>
+        <button class="btn btn-primary" id="tempSwitch"></button>
     </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
+    <div class="weather-description"></div>
+    <div class="humidity"></div>
+    <div class="wind-speed"></div>
+    <img class="weather-icon" alt="">
 </template>
 </body>
 </html>
