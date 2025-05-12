@@ -53,9 +53,9 @@ function removeLoader()
 }
 function fadeOut()
 {
-    setTimeout(removeLoader,3000);
+    setTimeout(removeLoader,1000);
 }
-
+// FETCH WEATHER
 async function fetchWeather(city) {
 
     if (cache[city]) {
@@ -75,6 +75,8 @@ async function fetchWeather(city) {
 
 }
 
+
+// submit Function
 async function submit() {
     loader();
 
@@ -102,6 +104,7 @@ async function submit() {
 }
 
 
+// Show weather in display
 
 function createWeatherDisplay(template, data) {
     const {name, main, weather, wind} = data;
@@ -132,7 +135,7 @@ function createWeatherDisplay(template, data) {
 
     return display;
 }
-
+// Update
 async function updateUI(data) {
     const template = document.getElementById('weather-template');
     const weatherDisplay = createWeatherDisplay(template, data);
@@ -140,14 +143,14 @@ async function updateUI(data) {
     weatherInfo.innerHTML = '';
     weatherInfo.appendChild(weatherDisplay);
 
-    // Сохраняем данные
+  // SAVING DATA TO LOCAL STORAGE
     saveWeatherData(data);
 
     document.getElementById('tempSwitch').addEventListener('click', toggleTemperature);
 }
 
 
-
+// Converting Temp
         function convertTemperature(temp, fromUnit) {
     return new Promise((resolve, reject) => {
         try {
@@ -171,7 +174,7 @@ async function updateUI(data) {
         }
     });
 }
-
+// ADDING TOGGLE TEMPERATURE
 async function toggleTemperature() {
     const tempElement = document.getElementById('temp');
     const tempTipeElement = document.getElementById('tempTipe');
@@ -181,21 +184,22 @@ async function toggleTemperature() {
     try {
         const result = await convertTemperature(currentTemp, currentUnit);
 
-        tempElement.innerHTML = result.temp.toFixed(2);
+        // Округляем результат конвертации
+        tempElement.innerHTML = Math.round(result.temp);
         tempTipeElement.innerHTML = result.newUnit;
 
         document.getElementById('temps').innerHTML = `
-            <button onclick="toggleTemperature()" class="btn btn-primary">${result.nextUnit}</button>
+            <button class="btn btn-primary" id="tempSwitch">${result.nextUnit}</button>
         `;
+
+        document.getElementById('tempSwitch').addEventListener('click', toggleTemperature);
     } catch (error) {
         console.error('Ошибка:', error.message);
-        document.getElementById('weatherInfo').innerHTML += `
-            <div class="alert alert-danger" role="alert">
-                error converting temperature
-            </div>
-        `;
     }
 }
+
+
+// SAVING WEATHER DATA
 function saveWeatherData(data) {
     try {
         const weatherData = {
@@ -208,6 +212,8 @@ function saveWeatherData(data) {
     }
 }
 
+
+// GETING LAST WEATHER DATA
 function getLastWeatherData() {
     try {
         const data = localStorage.getItem(WEATHER_STORAGE_KEY);
@@ -217,6 +223,7 @@ function getLastWeatherData() {
         return null;
     }
 }
+// LOADING LAST WEATHER DATA
         async function loadLastWeather() {
             const lastData = getLastWeatherData();
 
