@@ -6,15 +6,38 @@ const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 const cityInput = document.getElementById('cityInput');
 const searchBtn = document.getElementById('searchBtn');
 const weatherInfo = document.getElementById('weatherInfo');
-$.get("http://ipinfo.io", function(response) {
 
-    const geoCity = response.city;
-    console.log(geoCity);
-    // window.onload = fetchWeather(geoCity);
+// This is an arrow function
+const fetchLocation = async () => {
+    const response = await fetch('http://ipinfo.io/json');
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    drawResults(data);
+}
+
+const drawResults = (data) => {
+    const geoCity = data.city;
     document.getElementById('cityInput').value = geoCity;
     submit();
     document.getElementById('cityInput').value = "";
-}, "jsonp");
+}
+
+fetchLocation();
+
+// TODO:
+// 1. Understand difference between types of functions
+// 2. Understand how to use async and await and Promise object.
+// 3. Use html templates and string interpolation to draw the results
+// 4. Merge tempSwitchC and tempSwitch into one function and reuse it
+// 5. Use addEventListener instead of inline onclick event handlers
+// 6. Save the state of the latest results in the browser storage (use localStorage)
+
+// Example
+// document.querySelector('button').addEventListener('click', (e) => {
+//     alert('Button clicked!');
+// })
 
 const cache = {};
 
@@ -35,7 +58,7 @@ function fadeOut()
 async function fetchWeather(city) {
 
     if (cache[city]) {
-        console.log('City: ', city, ' was cached')
+        // console.log('City: ', city, ' was cached')
         return cache[city];
     }
 
@@ -94,7 +117,7 @@ function updateUI(data) {
 }
 function tempSwitchC() {
     var temp = document.getElementById('temp').innerHTML;
-    temp = (temp - 32) * 5/9;
+    temp = (temp - 32) * 5/9; // Round to integer
     document.getElementById('temp').innerHTML = temp;
     document.getElementById('tempTipe').innerHTML = "°C";
     document.getElementById('tempSwitchC').style.display = "none";
@@ -103,9 +126,6 @@ function tempSwitchC() {
         `
        <button onclick="tempSwitch()" class="btn btn-primary" id="tempSwitch">°F</button>
         `;
-
-
-
 }
 function tempSwitch() {
 
@@ -119,8 +139,9 @@ function tempSwitch() {
         `
         <button onclick="tempSwitchC()" class="btn btn-primary" id="tempSwitchC">°C</button>
         `;
-
 }
+
+
 fadeOut();
 searchBtn.addEventListener('click', submit);
 

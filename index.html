@@ -26,5 +26,20 @@
     <div class="loader"></div>
 </div>
 <script src="js/main.js"></script>
+
+<template>
+    <h2></h2>
+    <div>
+        <div id="temp"></div>
+        <span id="tempTipe"></span>
+    </div>
+    <div id="temps">
+        <button class="btn btn-primary" id="tempSwitch">°F</button>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
+</template>
 </body>
 </html>
